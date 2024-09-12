@@ -8,7 +8,7 @@
         <!-- Product Image Display -->
         <div class="image-container">
             <div class="image-wrapper">
-                <img src="../assets/acer-nitro5.png" alt="Product Image" class="product-image">
+                <img src="" alt="Product Image" class="product-image">
                 <label for="image" class="image-label">
                     <i class="bx bx-edit"></i>
                     <input type="file" id="image" name="image" accept="image/*" class="hidden-input">
@@ -37,13 +37,13 @@
         <!-- Quantity -->
         <div class="form-group">
             <label for="quantity" class="label">Quantity</label>
-            <input type="number" id="quantity" name="quantity" min="1" class="input" value="Current Quantity" required>
+            <input type="number" id="quantity" name="quantity" min="1" class="input" value="100" required>
         </div>
 
         <!-- Price -->
         <div class="form-group">
             <label for="price" class="label">Price</label>
-            <input type="text" id="price" name="price" class="input" value="Current Price" required>
+            <input type="text" id="price" name="price" class="input" value="Current Price" min = 1 required>
         </div>
 
         <!-- Submit Button -->
@@ -57,4 +57,4 @@
 <div class="center">
     <a href="ProductList.html" class="btn back-btn">&larr; Back to Product List</a>
 </div>
-{% {% endblock %}%}
+{% endblock %}
