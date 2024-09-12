@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+    <h1 class="title">Edit Product</h1>
+
+    <form>
+        <!-- Product Image Display -->
+        <div class="image-container">
+            <div class="image-wrapper">
+                <img src="../assets/acer-nitro5.png" alt="Product Image" class="product-image">
+                <label for="image" class="image-label">
+                    <i class="bx bx-edit"></i>
+                    <input type="file" id="image" name="image" accept="image/*" class="hidden-input">
+                </label>
+            </div>
+        </div>
+
+        <!-- Product Name -->
+        <div class="form-group">
+            <label for="productName" class="label">Product Name</label>
+            <input type="text" id="productName" name="productName" class="input" value="Current Product Name" required>
+        </div>
+
+        <!-- Category -->
+        <div class="form-group">
+            <label for="category" class="label">Category</label>
+            <select id="category" name="category" class="input" required>
+                <option value="electronics" selected>Electronics</option>
+                <option value="clothing">Clothing</option>
+                <option value="home_appliances">Home Appliances</option>
+                <option value="books">Books</option>
+                <option value="toys">Toys</option>
+            </select>
+        </div>
+
+        <!-- Quantity -->
+        <div class="form-group">
+            <label for="quantity" class="label">Quantity</label>
+            <input type="number" id="quantity" name="quantity" min="1" class="input" value="Current Quantity" required>
+        </div>
+
+        <!-- Price -->
+        <div class="form-group">
+            <label for="price" class="label">Price</label>
+            <input type="text" id="price" name="price" class="input" value="Current Price" required>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-group center">
+            <button type="submit" class="btn">Save Changes</button>
+        </div>
+    </form>
+</div>
+
+<!-- Back to Product List Button -->
+<div class="center">
+    <a href="ProductList.html" class="btn back-btn">&larr; Back to Product List</a>
+</div>
+{% {% endblock %}%}

@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+    <h1 class="title">Add New Product</h1>
+
+    <form>
+        <!-- Product Name -->
+        <div class="form-group">
+            <label for="productName" class="label">Product Name</label>
+            <input type="text" id="productName" name="productName" class="input" required>
+        </div>
+
+        <!-- Category -->
+        <div class="form-group">
+            <label for="category" class="label">Category</label>
+            <select id="category" name="category" class="input" required>
+                <option value="" disabled selected>Select a Category</option>
+                <option value="electronics">Electronics</option>
+                <option value="clothing">Clothing</option>
+                <option value="home_appliances">Home Appliances</option>
+                <option value="books">Books</option>
+                <option value="toys">Toys</option>
+            </select>
+        </div>
+
+        <!-- Quantity -->
+        <div class="form-group">
+            <label for="quantity" class="label">Quantity</label>
+            <input type="number" id="quantity" name="quantity" min="1" class="input" required>
+        </div>
+
+        <!-- Price -->
+        <div class="form-group">
+            <label for="price" class="label">Price</label>
+            <input type="text" id="price" name="price" class="input" required>
+        </div>
+
+        <!-- Image Upload -->
+        <div class="form-group">
+            <label for="image" class="label">Product Image</label>
+            <input type="file" id="image" name="image" accept="image/*" class="input" required>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-group center">
+            <button type="submit" class="btn">Add Product</button>
+        </div>
+    </form>
+</div>
+
+<!-- Back to Product List Button -->
+<div class="center">
+    <a href="ProductList.html" class="btn back-btn">&larr; Back to Product List</a>
+</div>
+{% {% endblock %}%}

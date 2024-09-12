@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+    <!-- Header with Title and Add Button -->
+    <div class="flex">
+        <h1>Product Inventory</h1>
+        <a href="AddProduct.html" class="add-product-btn">
+            Add Product
+        </a>
+    </div>
+
+    <!-- Responsive Table Container -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>S.No.</th>
+                    <th>Product Image</th>
+                    <th>Product Name</th>
+                    <th>Category</th>
+                    <th>Stock Quantity</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Sample Row 1 -->
+                <tr>
+                    <td>1</td>
+                    <td><img src="../assets/acer-nitro5.png" alt="Acer Nitro 5"></td>
+                    <td>Acer Nitro 5</td>
+                    <td>Laptops</td>
+                    <td>100</td>
+                    <td>$10.00</td>
+                    <td class="flex-center">
+                        <a href="EditProduct.html" class="edit-btn">Edit</a>
+                        <a href="#" class="delete-btn">Delete</a>
+                    </td>
+                </tr>
+                <!-- Sample Row 2 -->
+                <tr>
+                    <td>2</td>
+                    <td><img src="../assets/hp omen.png" alt="HP Omen"></td>
+                    <td>HP Omen</td>
+                    <td>Laptops</td>
+                    <td>100</td>
+                    <td>$10.00</td>
+                    <td class="flex-center">
+                        <a href="EditProduct.html" class="edit-btn">Edit</a>
+                        <a href="#" class="delete-btn">Delete</a>
+                    </td>
+                </tr>
+                <!-- Sample Row 3 -->
+                <tr>
+                    <td>3</td>
+                    <td><img src="../assets/lenovo.png" alt="Lenovo"></td>
+                    <td>Lenovo Legion</td>
+                    <td>Laptops</td>
+                    <td>100</td>
+                    <td>$10.00</td>
+                    <td class="flex-center">
+                        <a href="EditProduct.html" class="edit-btn">Edit</a>
+                        <a href="#" class="delete-btn">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% {% endblock %}%}

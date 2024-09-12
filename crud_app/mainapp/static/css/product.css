@@ -1,0 +1,120 @@
+/* General Styles */
+body {
+    background-color: #f3f4f6; /* Similar to bg-gray-100 */
+    min-height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+/* Header Styles */
+h1 {
+    font-size: 1.875rem; /* Similar to text-3xl */
+    font-weight: bold;
+    color: #1f2937; /* Similar to text-gray-800 */
+}
+
+a.add-product-btn {
+    background-color: #38a169; /* bg-green-500 */
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+}
+
+a.add-product-btn:hover {
+    background-color: #2f855a; /* hover:bg-green-600 */
+}
+
+/* Table Styles */
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    background-color: white;
+    border-collapse: collapse;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    font-size: 0.875rem; /* Similar to text-sm */
+    font-weight: normal;
+    color: #4b5563; /* text-gray-600 */
+}
+
+th {
+    background-color: #e5e7eb; /* Similar to bg-gray-200 */
+    color: #374151; /* text-gray-700 */
+    text-transform: uppercase;
+    font-size: 0.75rem; /* Leading-normal equivalent */
+}
+
+tr {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+tr:hover {
+    background-color: #f9fafb; /* Similar to hover:bg-gray-100 */
+}
+
+/* Table Actions */
+td img {
+    width: 3rem;
+    height: 3rem;
+    object-fit: cover;
+    border-radius: 0.25rem;
+}
+
+td a {
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+td a.edit-btn {
+    background-color: #3b82f6; /* bg-blue-500 */
+    color: white;
+}
+
+td a.edit-btn:hover {
+    background-color: #2563eb; /* hover:bg-blue-600 */
+}
+
+td a.delete-btn {
+    background-color: #ef4444; /* bg-red-500 */
+    color: white;
+}
+
+td a.delete-btn:hover {
+    background-color: #dc2626; /* hover:bg-red-600 */
+}
+
+/* Flexbox Layouts */
+.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
