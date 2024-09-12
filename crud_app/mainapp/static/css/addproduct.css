@@ -2,7 +2,7 @@
 .body-style {
     background-color: #f7fafc;
     min-height: 100vh;
-    margin: 10px;
+    margin: 0; /* Removed margin to center the container properly */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -10,15 +10,18 @@
     padding: 16px;
 }
 
+/* Container Styles */
 .container {
     background-color: #ffffff;
     padding: 32px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 500px;
+    max-width: 500px; /* Limits the container width */
+    margin: 0 auto; /* Centers the container horizontally */
 }
 
+/* Title Styles */
 .title {
     font-size: 24px;
     font-weight: bold;
@@ -29,6 +32,7 @@
 /* Form Group */
 .form-group {
     margin-bottom: 16px;
+    width: 100%; /* Ensures full width for form groups */
 }
 
 .label {
@@ -38,8 +42,13 @@
     margin-bottom: 8px;
 }
 
+/* Ensure consistent box-sizing */
+input, select {
+    box-sizing: border-box; /* Includes padding and border in element's width */
+}
+
 .input {
-    width: 100%;
+    width: 100%; /* Ensures input fields take full width of their container */
     padding: 8px 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -74,4 +83,13 @@
 .center {
     display: flex;
     justify-content: center;
+}
+
+.center a{
+    text-decoration: none;
+}
+
+.center button{
+    outline: none;
+    border: none;
 }

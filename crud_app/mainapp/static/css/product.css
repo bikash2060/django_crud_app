@@ -114,7 +114,7 @@ td a.delete-btn:hover {
 
 .flex-center {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     gap: 0.5rem;
 }
