@@ -25,45 +25,20 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Sample Row 1 -->
+                {% for product in products%}
                 <tr>
                     <td>1</td>
-                    <td><img src=" " alt="Acer Nitro 5"></td>
-                    <td>Acer Nitro 5</td>
-                    <td>Laptops</td>
-                    <td>100</td>
-                    <td>$10.00</td>
+                    <td><img src=" " alt="{{product.productName}}"></td>
+                    <td>{{product.productName}}</td>
+                    <td></td>
+                    <td>{{product.stockQuantity}}</td>
+                    <td>${{product.productPrice}}</td>
                     <td class="flex-center">
                         <a href="{% url 'edit-product'%}" class="edit-btn">Edit</a>
                         <a href="#" class="delete-btn">Delete</a>
                     </td>
                 </tr>
-                <!-- Sample Row 2 -->
-                <tr>
-                    <td>2</td>
-                    <td><img src="" alt="HP Omen"></td>
-                    <td>HP Omen</td>
-                    <td>Laptops</td>
-                    <td>100</td>
-                    <td>$10.00</td>
-                    <td class="flex-center">
-                        <a href="{% url 'edit-product'%}" class="edit-btn">Edit</a>
-                        <a href="#" class="delete-btn">Delete</a>
-                    </td>
-                </tr>
-                <!-- Sample Row 3 -->
-                <tr>
-                    <td>3</td>
-                    <td><img src="" alt="Lenovo"></td>
-                    <td>Lenovo Legion</td>
-                    <td>Laptops</td>
-                    <td>100</td>
-                    <td>$10.00</td>
-                    <td class="flex-center">
-                        <a href="{% url 'edit-product'%}" class="edit-btn">Edit</a>
-                        <a href="#" class="delete-btn">Delete</a>
-                    </td>
-                </tr>
+                {% endfor %}                
             </tbody>
         </table>
     </div>

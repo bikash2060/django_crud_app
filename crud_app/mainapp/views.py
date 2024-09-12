@@ -1,11 +1,13 @@
 from django.shortcuts import render
+from .models import *
 
 def showProductListView(request):
+    products = Product.objects.all()
     context = {
         'Title' : 'Product | CRUD App',
         'CSS_File' : 'product.css'
     }
-    return render(request, 'mainapp/productlist.html', {'context': context})
+    return render(request, 'mainapp/productlist.html', {'context': context, 'products': products})
 
 def showEditProductView(request):
     context = {
