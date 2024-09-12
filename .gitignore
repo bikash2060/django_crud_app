@@ -13,5 +13,5 @@ db.sqlite3
 /static/
 
 # Virtual environments
-venv/
+virtualenv/
 env/
