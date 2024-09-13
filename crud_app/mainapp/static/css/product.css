@@ -122,3 +122,57 @@ td a.delete-btn:hover {
     align-items: center;
     gap: 0.5rem;
 }
+
+/* Styles for the message block */
+ul.messages {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+ul.messages li {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #fff;  /* Text color */
+}
+
+/* Success message styling */
+ul.messages .success {
+    background-color: #4CAF50; /* Green for success */
+}
+
+/* Error message styling */
+ul.messages .error {
+    background-color: #f44336; /* Red for errors */
+}
+
+/* Warning message styling */
+ul.messages .warning {
+    background-color: #ff9800; /* Orange for warnings */
+}
+
+/* Info message styling */
+ul.messages .info {
+    background-color: #2196F3; /* Blue for info */
+}
+
+/* Text alignment for messages */
+ul.messages li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Close button styling */
+ul.messages li .close-btn {
+    font-size: 18px;
+    cursor: pointer;
+    margin-left: 15px;
+}
+
+/* Example hover effect for the close button */
+ul.messages li .close-btn:hover {
+    color: #000;
+}

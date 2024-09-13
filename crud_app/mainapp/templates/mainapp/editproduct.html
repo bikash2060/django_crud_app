@@ -1,14 +1,15 @@
 {% extends "layout.html" %}
-
+{% load static %}
 {% block content %}
 <div class="container">
     <h1 class="title">Edit Product</h1>
 
-    <form>
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
         <!-- Product Image Display -->
         <div class="image-container">
             <div class="image-wrapper">
-                <img src="" alt="Product Image" class="product-image">
+                <img src={% static 'media/'%}{{product.ProductImage}} alt="{{product.ProductImage}}" class="product-image">
                 <label for="image" class="image-label">
                     <i class="bx bx-edit"></i>
                     <input type="file" id="image" name="image" accept="image/*" class="hidden-input">
@@ -19,31 +20,48 @@
         <!-- Product Name -->
         <div class="form-group">
             <label for="productName" class="label">Product Name</label>
-            <input type="text" id="productName" name="productName" class="input" value="Current Product Name" required>
+            <input type="text" id="productName" name="productName" class="input" value="{{product.ProductName}}" required>
         </div>
 
         <!-- Category -->
-        <div class="form-group">
-            <label for="category" class="label">Category</label>
-            <select id="category" name="category" class="input" required>
-                <option value="electronics" selected>Electronics</option>
-                <option value="clothing">Clothing</option>
-                <option value="home_appliances">Home Appliances</option>
-                <option value="books">Books</option>
-                <option value="toys">Toys</option>
-            </select>
-        </div>
+<div class="form-group">
+    <label for="category" class="label">Category</label>
+    <select id="category" name="category" class="input" required>
+        <option value="{{ product.ProductCategory }}" selected>{{ product.ProductCategory|capfirst }}</option>
+        
+        {% if product.ProductCategory|lower != "laptop" %}
+            <option value="laptop">Laptop</option>
+        {% endif %}
+        
+        {% if product.ProductCategory|lower != "smartphone" %}
+            <option value="smartphone">Smartphone</option>
+        {% endif %}
+        
+        {% if product.ProductCategory|lower != "tablet" %}
+            <option value="tablet">Tablet</option>
+        {% endif %}
+        
+        {% if product.ProductCategory|lower != "smartwatch" %}
+            <option value="smartwatch">Smartwatch</option>
+        {% endif %}
+        
+        {% if product.ProductCategory|lower != "headphones" %}
+            <option value="headphones">Headphones</option>
+        {% endif %}
+    </select>
+</div>
+
 
         <!-- Quantity -->
         <div class="form-group">
             <label for="quantity" class="label">Quantity</label>
-            <input type="number" id="quantity" name="quantity" min="1" class="input" value="100" required>
+            <input type="number" id="quantity" name="quantity" min="1" class="input" value="{{product.StockQuantity}}" required>
         </div>
 
         <!-- Price -->
         <div class="form-group">
             <label for="price" class="label">Price</label>
-            <input type="text" id="price" name="price" class="input" value="Current Price" min = 1 required>
+            <input type="text" id="price" name="price" class="input" value="{{product.ProductPrice}}" min = 1 required>
         </div>
 
         <!-- Submit Button -->

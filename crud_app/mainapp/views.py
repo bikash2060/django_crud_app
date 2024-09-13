@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from .utils import *
 
@@ -38,12 +38,47 @@ def showAddProductView(request):
     }
     return render(request, 'mainapp/addproduct.html', context)
 
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
+
 def showEditProductView(request, id):
+    try:
+        product = Product.objects.get(pk=id)
+    except Product.DoesNotExist:
+        return redirect("product-list")
+
+    if request.method == "POST":
+        productname = request.POST.get("productName")
+        category = request.POST.get("category")
+        quantity = int(request.POST.get("quantity"))
+        price = float(request.POST.get("price"))
+        image = request.FILES.get("image")
+        print(image)
+
+        product.ProductName = productname
+        if category:
+            product.ProductCategory = category
+        product.StockQuantity = quantity
+        product.ProductPrice = price
+        if image:
+            product.ProductImage = image
+
+        product.save()
+        return redirect("product-list")
+
     context = {
-        'Title' : 'Edit Product | CRUD App',
-        'CSS_File' : 'editproduct.css'
+        'Title': 'Edit Product | CRUD App',
+        'CSS_File': 'editproduct.css',
+        'product': product
     }
     return render(request, 'mainapp/editproduct.html', context)
 
 def deleteProduct(request, id):
-    return 1
+    try:
+        product = Product.objects.get(pk=id)
+    except Product.DoesNotExist:
+        return redirect("product-list")
+    
+    product.delete()
+    
+    return redirect("product-list")
