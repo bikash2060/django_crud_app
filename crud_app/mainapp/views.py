@@ -44,3 +44,6 @@ def showEditProductView(request, id):
         'CSS_File' : 'editproduct.css'
     }
     return render(request, 'mainapp/editproduct.html', context)
+
+def deleteProduct(request, id):
+    return 1

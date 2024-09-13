@@ -36,7 +36,7 @@
                         <td>${{ product.ProductPrice }}</td>
                         <td class="flex-center">
                             <a href="{% url 'edit-product' product.ProductID%}" class="edit-btn">Edit</a>
-                            <a href="" class="delete-btn">Delete</a>
+                            <a href="{% url 'delete-product' product.ProductID%}" class="delete-btn">Delete</a>
                         </td>
                     </tr>
                     {% endfor %}
