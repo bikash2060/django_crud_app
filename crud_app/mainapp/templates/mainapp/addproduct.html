@@ -4,7 +4,8 @@
 <div class="container">
     <h1 class="title">Add New Product</h1>
 
-    <form enctype="multipart/form-data">
+    <form action="{% url 'add-product'%}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
         <!-- Product Name -->
         <div class="form-group">
             <label for="productName" class="label">Product Name</label>
@@ -16,12 +17,13 @@
             <label for="category" class="label">Category</label>
             <select id="category" name="category" class="input" required>
                 <option value="" disabled selected>Select a Category</option>
-                <option value="electronics">Electronics</option>
-                <option value="clothing">Clothing</option>
-                <option value="home_appliances">Home Appliances</option>
-                <option value="books">Books</option>
-                <option value="toys">Toys</option>
+                <option value="laptop">Laptop</option>
+                <option value="smartphone">Smartphone</option>
+                <option value="tablet">Tablet</option>
+                <option value="smartwatch">Smartwatch</option>
+                <option value="headphones">Headphones</option>
             </select>
+            
         </div>
 
         <!-- Quantity -->
@@ -39,7 +41,7 @@
         <!-- Image Upload -->
         <div class="form-group">
             <label for="image" class="label">Product Image</label>
-            <input type="file" id="image" name="image" accept="image/*" class="input" required>
+            <input type="file" id="image" name="image" class="input" required>
         </div>
 
         <!-- Submit Button -->
