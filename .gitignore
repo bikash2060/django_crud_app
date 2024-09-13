@@ -14,5 +14,6 @@ db.sqlite3
 
 # Virtual environments
 /CRUD-APP/virtualenv/
-venv/
+/crud_app/mainapp/__pycache__
+/crud_app/mainapp/migrations
 
