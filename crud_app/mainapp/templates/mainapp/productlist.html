@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-
+{% load static %}
 {% block content %}
 <div class="container">
     <!-- Header with Title and Add Button -->
@@ -25,20 +25,26 @@
                 </tr>
             </thead>
             <tbody>
-                {% for product in products%}
-                <tr>
-                    <td>1</td>
-                    <td><img src=" " alt="{{product.productName}}"></td>
-                    <td>{{product.productName}}</td>
-                    <td></td>
-                    <td>{{product.stockQuantity}}</td>
-                    <td>${{product.productPrice}}</td>
-                    <td class="flex-center">
-                        <a href="{% url 'edit-product'%}" class="edit-btn">Edit</a>
-                        <a href="#" class="delete-btn">Delete</a>
-                    </td>
-                </tr>
-                {% endfor %}                
+                {% if products %}
+                    {% for product in products %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td><img src={% static 'media/product_images/'%}{{product.ProductImage}} alt="{{ product.ProductName }}"></td>
+                        <td>{{ product.ProductName }}</td>
+                        <td>{{ product.ProductCategory|capfirst }}</td>
+                        <td>{{ product.StockQuantity }}</td>
+                        <td>${{ product.ProductPrice }}</td>
+                        <td class="flex-center">
+                            <a href="{% url 'edit-product' product.ProductID%}" class="edit-btn">Edit</a>
+                            <a href="" class="delete-btn">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="7" class="no-products">No Products Available</td>
+                    </tr>
+                {% endif %}
             </tbody>
         </table>
     </div>
