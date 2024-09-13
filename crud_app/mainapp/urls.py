@@ -9,3 +9,4 @@ urlpatterns = [
     path("products/edit-product/<int:id>", views.showEditProductView, name="edit-product"),
     path("products/delete-product/<int:id>", views.deleteProduct, name="delete-product"),
 ]
+

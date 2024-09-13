@@ -2,6 +2,14 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from .utils import *
 
+def custom_error_page(request, exception):
+    context = {
+        'Title' : 'Page Not Found',
+        'CSS_File' : 'errorpage.css',
+    }
+    return render(request, 'mainapp/errorpage.html', context)
+
+
 def showProductListView(request):
     products = Product.objects.all()
     context = {
