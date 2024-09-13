@@ -1,19 +1,12 @@
 from django.db import models
 
-class ProductCategory(models.Model):  
-    categoryID = models.AutoField(primary_key=True)
-    categoryName = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.categoryName
-
 class Product(models.Model):
-    productID = models.AutoField(primary_key=True)
-    productName = models.CharField(max_length=200)
-    productImage = models.ImageField(upload_to="product_images/", max_length=200, null=True)  
-    stockQuantity = models.IntegerField()
-    productPrice = models.FloatField()  
-    categoryName = models.ForeignKey(ProductCategory, on_delete=models.CASCADE, related_name="category")  
+    ProductID = models.AutoField(primary_key=True)
+    ProductName = models.CharField(max_length=200)
+    ProductPrice = models.FloatField()  
+    StockQuantity = models.IntegerField()
+    ProductCategory = models.CharField(max_length=200, default="")
+    ProductImage = models.ImageField(upload_to="product_images/", max_length=200, null=True)  
 
     def __str__(self):
         return self.productName
