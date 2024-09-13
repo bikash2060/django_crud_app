@@ -10,7 +10,7 @@ class ProductCategory(models.Model):
 class Product(models.Model):
     productID = models.AutoField(primary_key=True)
     productName = models.CharField(max_length=200)
-    productImage = models.FileField(null=True, blank=True)  
+    productImage = models.ImageField(upload_to="product_images/", max_length=200, null=True)  
     stockQuantity = models.IntegerField()
     productPrice = models.FloatField()  
     categoryName = models.ForeignKey(ProductCategory, on_delete=models.CASCADE, related_name="category")  
