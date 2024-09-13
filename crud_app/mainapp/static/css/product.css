@@ -105,6 +105,10 @@ td a.delete-btn:hover {
     background-color: #dc2626; /* hover:bg-red-600 */
 }
 
+.no-products{
+    text-align: center;
+}
+
 /* Flexbox Layouts */
 .flex {
     display: flex;
