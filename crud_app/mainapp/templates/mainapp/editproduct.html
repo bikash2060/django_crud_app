@@ -9,7 +9,7 @@
         <!-- Product Image Display -->
         <div class="image-container">
             <div class="image-wrapper">
-                <img src={% static 'media/'%}{{product.ProductImage}} alt="{{product.ProductImage}}" class="product-image">
+                <img src={% static 'media/product_images/'%}{{product.ProductImage}} alt="{{product.ProductImage}}" class="product-image">
                 <label for="image" class="image-label">
                     <i class="bx bx-edit"></i>
                     <input type="file" id="image" name="image" accept="image/*" class="hidden-input">
