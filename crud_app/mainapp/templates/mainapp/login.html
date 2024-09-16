@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="login-section">
+    <div class="container">
+        <h2>Log In</h2>
+        <div class="form-container">
+            <form id="form">
+                
+                <div class="input-name">
+                    <i class="fa-solid fa-user user"></i>
+                    <input type="text" placeholder="Username" class="username" name="username" id="username">
+                    <span id="username-error"></span>
+                </div>
+
+                <div class="input-name">
+                    <i class="fa-solid fa-lock pass"></i>
+                    <input type="password" placeholder="Password" class="password" name="password" id="password">
+                    <span id="password-error"></span>
+                </div>
+                
+                <div class="input-name">
+                    <input type="submit" class="btn" value="Login">
+                </div>
+
+                <div class="input-name">
+                    <p>Don't have account? <a href="{% url 'user-signup' %}">Create new account </a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
