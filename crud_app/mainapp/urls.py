@@ -8,5 +8,8 @@ urlpatterns = [
     path("products/add-product/", views.showAddProductView, name="add-product"),
     path("products/edit-product/<int:id>", views.showEditProductView, name="edit-product"),
     path("products/delete-product/<int:id>", views.deleteProduct, name="delete-product"),
+    path("user-login/", views.showLoginPageView, name="user-login"),
+    path("user-signup/", views.showSignUpPageView, name="user-signup"),
+    
 ]
 
