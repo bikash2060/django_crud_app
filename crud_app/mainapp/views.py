@@ -1,6 +1,8 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from .models import *
 from .utils import *
+from django.contrib.auth.models import User
+from django.contrib.messages import constants as messages
 
 def custom_error_page(request, exception):
     context = {
@@ -22,11 +24,11 @@ def showProductListView(request):
 def showAddProductView(request):
     if request.method == "POST":
         # Retrieve data from the user
-        productname = request.POST[productName]
-        category = request.POST[productCategory]
-        quantity = int(request.POST[productQuantity])
-        price = float(request.POST[productPrice])
-        image = request.FILES.get(productImage)
+        productname = request.POST[PRODUCT_NAME]
+        category = request.POST[PRODUCT_CATEGORY]
+        quantity = int(request.POST[PRODUCT_CATEGORY])
+        price = float(request.POST[PRODUCT_PRICE])
+        image = request.FILES.get(PRODUCT_IMAGE)
         
         # Create the Product Instance
         newProduct = Product.objects.create(
@@ -46,9 +48,6 @@ def showAddProductView(request):
     }
     return render(request, 'mainapp/addproduct.html', context)
 
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib import messages
-
 def showEditProductView(request, id):
     try:
         product = Product.objects.get(pk=id)
@@ -56,12 +55,11 @@ def showEditProductView(request, id):
         return redirect("product-list")
 
     if request.method == "POST":
-        productname = request.POST.get("productName")
-        category = request.POST.get("category")
-        quantity = int(request.POST.get("quantity"))
-        price = float(request.POST.get("price"))
-        image = request.FILES.get("image")
-        print(image)
+        productname = request.POST.get(PRODUCT_NAME)
+        category = request.POST.get(PRODUCT_CATEGORY)
+        quantity = int(request.POST.get(PRODUCT_QUANTITY))
+        price = float(request.POST.get(PRODUCT_PRICE))
+        image = request.FILES.get(PRODUCT_IMAGE)
 
         product.ProductName = productname
         if category:
@@ -90,3 +88,42 @@ def deleteProduct(request, id):
     product.delete()
     
     return redirect("product-list")
+
+def showLoginPageView(request):
+    context = {
+        'Title': 'Login | CRUD App',
+        'CSS_File': 'login.css'
+    }
+    return render(request, 'mainapp/login.html', context)
+
+def showSignUpPageView(request):
+    
+    if request.method == "POST":
+        firstName = request.POST.get(FIRST_NAME)
+        lastName = request.POST.get(LAST_NAME)
+        emailAddress = request.POST.get(EMAIL_ADDRESS)
+        username = request.POST.get(USERNAME)
+        password = request.POST.get(PASSWORD)
+        
+        user = User.objects.filter(username = username)
+        if user.exists():
+            messages.info(request, "Username already existed!")
+            return redirect("user-signup")
+        
+        newUser = User.objects.create(
+            first_name = firstName,
+            last_name = lastName,
+            email = emailAddress,
+            username = username,
+        )
+        newUser.set_password(password)
+        newUser.save()
+        messages.success(request, "Account created successfully!")
+        
+        return redirect("user-login")   
+         
+    context = {
+        'Title': 'SignUp | CRUD App',
+        'CSS_File': 'signup.css'
+    }
+    return render(request, 'mainapp/signup.html', context)
