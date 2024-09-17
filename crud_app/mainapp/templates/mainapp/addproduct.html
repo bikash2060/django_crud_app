@@ -1,5 +1,15 @@
 {% extends "layout.html" %}
 
+{% load static %}
+
+{% block title %}
+<title>Add Product | CRUD App</title>
+{% endblock %}
+
+{% block cssfile %}
+<link rel="stylesheet" href="{% static 'css/addproduct.css' %}">
+{% endblock %}
+
 {% block content %}
 <div class="container">
     <h1 class="title">Add New Product</h1>
