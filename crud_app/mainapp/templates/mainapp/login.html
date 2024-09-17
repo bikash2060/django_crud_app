@@ -1,32 +1,44 @@
 {% extends "layout.html" %}
 
+{% block  title %}
+<title>Login Page | CRUD App</title>
+{% endblock %}
+
 {% block content %}
-<div class="login-section">
-    <div class="container">
-        <h2>Log In</h2>
-        <div class="form-container">
-            <form id="form">
-                
-                <div class="input-name">
-                    <i class="fa-solid fa-user user"></i>
-                    <input type="text" placeholder="Username" class="username" name="username" id="username">
-                    <span id="username-error"></span>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        <strong>{{ message|capfirst }}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title text-center">Log In</h3>
+                    <form>
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" placeholder="Enter your username">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Enter your password">
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Log In</button>
+                        </div>
+                        <div class="text-center mt-3">
+                            <p>Don't have an account? <a href="{% url 'user-signup' %}">Sign up</a></p>
+                        </div>
+                    </form>
                 </div>
-
-                <div class="input-name">
-                    <i class="fa-solid fa-lock pass"></i>
-                    <input type="password" placeholder="Password" class="password" name="password" id="password">
-                    <span id="password-error"></span>
-                </div>
-                
-                <div class="input-name">
-                    <input type="submit" class="btn" value="Login">
-                </div>
-
-                <div class="input-name">
-                    <p>Don't have account? <a href="{% url 'user-signup' %}">Create new account </a></p>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
