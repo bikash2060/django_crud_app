@@ -21,14 +21,15 @@
             <div class="card">
                 <div class="card-body">
                     <h3 class="card-title text-center">Log In</h3>
-                    <form>
+                    <form action="{% url 'user-login' %}" method="POST">
+                        {% csrf_token %}
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username" placeholder="Enter your username">
+                            <input type="text" class="form-control" id="username" name = "username" placeholder="Enter your username" value = "{{username|default_if_none:''}}"required>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" placeholder="Enter your password">
+                            <input type="password" class="form-control" id="password" name = "password" placeholder="Enter your password" required>
                         </div>
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary">Log In</button>

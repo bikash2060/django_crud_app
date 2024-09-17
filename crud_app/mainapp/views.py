@@ -3,6 +3,8 @@ from .models import *
 from .utils import *
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 def custom_error_page(request, exception):
     context = {
@@ -11,7 +13,7 @@ def custom_error_page(request, exception):
     }
     return render(request, 'mainapp/errorpage.html', context)
 
-
+@login_required(login_url="user-login/")
 def showProductListView(request):
     products = Product.objects.all()
     context = {
@@ -19,6 +21,7 @@ def showProductListView(request):
     }
     return render(request, 'mainapp/productlist.html', context)
 
+@login_required(login_url="/user-login/")
 def showAddProductView(request):
     if request.method == "POST":
         # Retrieve data from the user
@@ -42,6 +45,7 @@ def showAddProductView(request):
 
     return render(request, 'mainapp/addproduct.html')
 
+@login_required(login_url="/user-login/")
 def showEditProductView(request, id):
     try:
         product = Product.objects.get(pk=id)
@@ -71,6 +75,7 @@ def showEditProductView(request, id):
     }
     return render(request, 'mainapp/editproduct.html', context)
 
+@login_required(login_url="/user-login/")
 def deleteProduct(request, id):
     try:
         product = Product.objects.get(pk=id)
@@ -82,6 +87,22 @@ def deleteProduct(request, id):
     return redirect("product-list")
 
 def showLoginPageView(request):
+    
+    if request.method == "POST":
+        username = request.POST.get(USERNAME)
+        password = request.POST.get(PASSWORD)
+        
+        if User.objects.filter(username=username).exists():
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect("product-list")
+            else:
+                messages.error(request, "Invalid password!", {'username': username})
+                return redirect("user-login")           
+        else:
+            messages.error(request, "User does not exist!")
+            return redirect("user-login")
     
     return render(request, 'mainapp/login.html')
 
@@ -138,3 +159,7 @@ def showSignUpPageView(request):
         return redirect("user-signup")   
          
     return render(request, 'mainapp/signup.html')
+
+def userLogout(request):
+    logout(request)
+    return redirect("user-login")

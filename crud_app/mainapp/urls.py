@@ -10,6 +10,7 @@ urlpatterns = [
     path("products/delete-product/<int:id>", views.deleteProduct, name="delete-product"),
     path("user-login/", views.showLoginPageView, name="user-login"),
     path("user-signup/", views.showSignUpPageView, name="user-signup"),
+    path("user-logout", views.userLogout, name="user-logout"),
     
 ]
 
