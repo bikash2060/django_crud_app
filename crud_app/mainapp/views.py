@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import *
 from .utils import *
 from django.contrib.auth.models import User
-from django.contrib.messages import constants as messages
+from django.contrib import messages
 
 def custom_error_page(request, exception):
     context = {
@@ -15,8 +15,6 @@ def custom_error_page(request, exception):
 def showProductListView(request):
     products = Product.objects.all()
     context = {
-        'Title' : 'Product | CRUD App',
-        'CSS_File' : 'product.css',
         'products': products
     }
     return render(request, 'mainapp/productlist.html', context)
@@ -41,12 +39,8 @@ def showAddProductView(request):
         newProduct.save()
         
         return redirect("product-list")              
-        
-    context = {
-        'Title' : 'Add Product | CRUD App',
-        'CSS_File' : 'addproduct.css'
-    }
-    return render(request, 'mainapp/addproduct.html', context)
+
+    return render(request, 'mainapp/addproduct.html')
 
 def showEditProductView(request, id):
     try:
@@ -73,8 +67,6 @@ def showEditProductView(request, id):
         return redirect("product-list")
 
     context = {
-        'Title': 'Edit Product | CRUD App',
-        'CSS_File': 'editproduct.css',
         'product': product
     }
     return render(request, 'mainapp/editproduct.html', context)
@@ -90,11 +82,8 @@ def deleteProduct(request, id):
     return redirect("product-list")
 
 def showLoginPageView(request):
-    context = {
-        'Title': 'Login | CRUD App',
-        'CSS_File': 'login.css'
-    }
-    return render(request, 'mainapp/login.html', context)
+    
+    return render(request, 'mainapp/login.html')
 
 def showSignUpPageView(request):
     
@@ -104,11 +93,37 @@ def showSignUpPageView(request):
         emailAddress = request.POST.get(EMAIL_ADDRESS)
         username = request.POST.get(USERNAME)
         password = request.POST.get(PASSWORD)
+        retypePassword = request.POST.get(RETYPED_PASSWORD)
         
-        user = User.objects.filter(username = username)
-        if user.exists():
-            messages.info(request, "Username already existed!")
-            return redirect("user-signup")
+        # Check for existing email
+        if User.objects.filter(email=emailAddress).exists():
+            messages.error(request, "Email address already exists!")
+            return render(request, 'mainapp/signup.html', {
+                'firstName': firstName,
+                'lastName': lastName,
+                'emailAddress': emailAddress,
+                'username': username,
+            })
+
+        # Check for existing username
+        if User.objects.filter(username=username).exists():
+            messages.error(request, "Username already exists!")
+            return render(request, 'mainapp/signup.html', {
+                'firstName': firstName,
+                'lastName': lastName,
+                'emailAddress': emailAddress,
+                'username': username,
+            })
+
+        # Check if passwords match
+        if password != retypePassword:
+            messages.error(request, "Passwords do not match!")
+            return render(request, 'mainapp/signup.html', {
+                'firstName': firstName,
+                'lastName': lastName,
+                'emailAddress': emailAddress,
+                'username': username,
+            })
         
         newUser = User.objects.create(
             first_name = firstName,
@@ -120,10 +135,6 @@ def showSignUpPageView(request):
         newUser.save()
         messages.success(request, "Account created successfully!")
         
-        return redirect("user-login")   
+        return redirect("user-signup")   
          
-    context = {
-        'Title': 'SignUp | CRUD App',
-        'CSS_File': 'signup.css'
-    }
-    return render(request, 'mainapp/signup.html', context)
+    return render(request, 'mainapp/signup.html')
