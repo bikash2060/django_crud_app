@@ -1,52 +1,64 @@
 {% extends "layout.html" %}
+
+{% block title %}
+<title>Sign Up Page | CRUD App</title>
+{% endblock %}
+
 {% block content %}
-<div class="signup-section">
-    <div class="container">
-        {% if messages %}
-        <div class="alert alert-danger" role="alert">
-            {% for message in messages %}
-                {{message}}
-            {% endfor %} 
-        </div>
-        {% endif %}
-        <h2>Sign Up</h2>
-        <div class="form-container">
-            <form action="{% url 'user-signup'%}" method="POST" >
-                {% csrf_token %}
-                <div class="input-name">
-                    <i class="fa-solid fa-user lock"></i>
-                    <input type="text" placeholder="First Name" class="fname" name="firstName">
-                    <span>
-                        <i class="fa-solid fa-user lock"></i>
-                        <input type="text" placeholder="Last Name" class="lname" name="lastName">
-                    </span>
-                </div>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        <strong>{{ message|capfirst }}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+            {% endif %}
 
-                <div class="input-name">
-                    <i class="fa-solid fa-envelope envelope"></i>
-                    <input type="text" placeholder="Email" class="email" name="emailAddress">
-                    
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title text-center">Sign Up</h3>
+                    <form action="{% url 'user-signup' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="firstName" class="form-label">First Name</label>
+                            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter your first name" value="{{ firstName|default_if_none:'' }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="lastName" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter your last name" value="{{ lastName|default_if_none:'' }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="emailAddress" placeholder="Enter your email" value="{{ emailAddress|default_if_none:'' }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Choose a username" value="{{ username|default_if_none:'' }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter a password" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="retypePassword" class="form-label">Retype Password</label>
+                            <input type="password" class="form-control" id="retypePassword" name="retypePassword" placeholder="Retype your password" required>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Sign Up</button>
+                        </div>
+                        <div class="text-center mt-3">
+                            <p>Already have an account? <a href="{% url 'user-login' %}">Log in</a></p>
+                        </div>
+                    </form>
                 </div>
-                
-                <div class="input-name">
-                    <i class="fa-solid fa-user phoneNumber"></i>
-                    <input type="text" placeholder="Username" class="username" name="username">
-                </div>
-                
-                <div class="input-name">
-                    <i class="fa-solid fa-lock pass"></i>
-                    <input type="password" placeholder="Password" class="password" name="password">
-                </div>
-
-                <div class="input-name">
-                    <input type="submit" class="btn" value="Sing Up">
-                </div>
-                
-                <div class="login-link">
-                    <p>Already have an account? <a href="{% url 'user-login' %}">Log In</a></p>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
+
 {% endblock %}
