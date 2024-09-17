@@ -21,13 +21,13 @@ def showProductListView(request):
     }
     return render(request, 'mainapp/productlist.html', context)
 
-@login_required(login_url="/user-login/")
+@login_required(login_url="user-login/")
 def showAddProductView(request):
     if request.method == "POST":
         # Retrieve data from the user
         productname = request.POST[PRODUCT_NAME]
         category = request.POST[PRODUCT_CATEGORY]
-        quantity = int(request.POST[PRODUCT_CATEGORY])
+        quantity = int(request.POST[PRODUCT_QUANTITY])
         price = float(request.POST[PRODUCT_PRICE])
         image = request.FILES.get(PRODUCT_IMAGE)
         
@@ -45,7 +45,7 @@ def showAddProductView(request):
 
     return render(request, 'mainapp/addproduct.html')
 
-@login_required(login_url="/user-login/")
+@login_required(login_url="user-login/")
 def showEditProductView(request, id):
     try:
         product = Product.objects.get(pk=id)
@@ -75,7 +75,7 @@ def showEditProductView(request, id):
     }
     return render(request, 'mainapp/editproduct.html', context)
 
-@login_required(login_url="/user-login/")
+@login_required(login_url="user-login/")
 def deleteProduct(request, id):
     try:
         product = Product.objects.get(pk=id)
@@ -87,6 +87,8 @@ def deleteProduct(request, id):
     return redirect("product-list")
 
 def showLoginPageView(request):
+    if request.user.is_authenticated:
+        return redirect("product-list")
     
     if request.method == "POST":
         username = request.POST.get(USERNAME)
@@ -107,6 +109,8 @@ def showLoginPageView(request):
     return render(request, 'mainapp/login.html')
 
 def showSignUpPageView(request):
+    if request.user.is_authenticated:
+        return redirect("product-list") 
     
     if request.method == "POST":
         firstName = request.POST.get(FIRST_NAME)
