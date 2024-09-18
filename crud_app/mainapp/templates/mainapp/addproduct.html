@@ -7,62 +7,63 @@
 {% endblock %}
 
 {% block cssfile %}
-<link rel="stylesheet" href="{% static 'css/addproduct.css' %}">
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <h1 class="title">Add New Product</h1>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Add New Product</h1>
 
     <form action="{% url 'add-product'%}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
+        
         <!-- Product Name -->
-        <div class="form-group">
-            <label for="productName" class="label">Product Name</label>
-            <input type="text" id="productName" name="productName" class="input" required>
+        <div class="mb-3">
+            <label for="productName" class="form-label">Product Name</label>
+            <input type="text" id="productName" name="productName" class="form-control" required>
         </div>
 
         <!-- Category -->
-        <div class="form-group">
-            <label for="category" class="label">Category</label>
-            <select id="category" name="category" class="input" required>
+        <div class="mb-3">
+            <label for="category" class="form-label">Category</label>
+            <select id="category" name="category" class="form-select" required>
                 <option value="" disabled selected>Select a Category</option>
                 <option value="laptop">Laptop</option>
                 <option value="smartphone">Smartphone</option>
                 <option value="tablet">Tablet</option>
                 <option value="smartwatch">Smartwatch</option>
                 <option value="headphones">Headphones</option>
+                <option value="keyboard">Keyboard</option>
             </select>
-            
         </div>
 
         <!-- Quantity -->
-        <div class="form-group">
-            <label for="quantity" class="label">Quantity</label>
-            <input type="number" id="quantity" name="quantity" min="1" class="input" required>
+        <div class="mb-3">
+            <label for="quantity" class="form-label">Quantity</label>
+            <input type="number" id="quantity" name="quantity" min="1" class="form-control" required>
         </div>
 
         <!-- Price -->
-        <div class="form-group">
-            <label for="price" class="label">Price</label>
-            <input type="text" id="price" name="price" class="input" required>
+        <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <input type="text" id="price" name="price" class="form-control" required>
         </div>
 
         <!-- Image Upload -->
-        <div class="form-group">
-            <label for="image" class="label">Product Image</label>
-            <input type="file" id="image" name="image" class="input" required>
+        <div class="mb-3">
+            <label for="image" class="form-label">Product Image</label>
+            <input type="file" id="image" name="image" class="form-control" required>
         </div>
 
         <!-- Submit Button -->
-        <div class="form-group center">
-            <button type="submit" class="btn">Add Product</button>
+        <div class="d-grid">
+            <button type="submit" class="btn btn-primary">Add Product</button>
         </div>
     </form>
+
+    <!-- Back to Product List Button -->
+    <div class="d-grid mt-3">
+        <a href="{% url 'product-list'%}" class="btn btn-secondary">&larr; Back to Product List</a>
+    </div>
 </div>
 
-<!-- Back to Product List Button -->
-<div class="center">
-    <a href="{% url 'product-list'%}" class="btn back-btn">&larr; Back to Product List</a>
-</div>
 {% endblock %}

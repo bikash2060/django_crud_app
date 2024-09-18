@@ -15,7 +15,8 @@ def custom_error_page(request, exception):
 
 @login_required(login_url="user-login/")
 def showProductListView(request):
-    products = Product.objects.all()
+    userID = request.user.id
+    products = Product.objects.filter(user_id=userID)
     context = {
         'products': products
     }
@@ -24,6 +25,7 @@ def showProductListView(request):
 @login_required(login_url="user-login/")
 def showAddProductView(request):
     if request.method == "POST":
+        userID = request.user.id
         # Retrieve data from the user
         productname = request.POST[PRODUCT_NAME]
         category = request.POST[PRODUCT_CATEGORY]
@@ -37,7 +39,8 @@ def showAddProductView(request):
             ProductImage = image,
             StockQuantity = quantity,
             ProductPrice = price,
-            ProductCategory = category
+            ProductCategory = category,
+            user_id = userID
         )
         newProduct.save()
         

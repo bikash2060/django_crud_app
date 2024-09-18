@@ -10,78 +10,79 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <h1 class="title">Edit Product</h1>
+<div class="container mt-5 mb-5">
+    <h1 class="text-center mb-4">Edit Product</h1>
 
     <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
+        
         <!-- Product Image Display -->
-        <div class="image-container">
-            <div class="image-wrapper">
-                <img src={% static 'media/product_images/'%}{{product.ProductImage}} alt="{{product.ProductImage}}" class="product-image">
-                <label for="image" class="image-label">
+        <div class="text-center mb-4">
+            <div class="position-relative d-inline-block">
+                <img src="{% static 'media/product_images/'%}{{product.ProductImage}}" alt="{{product.ProductImage}}" class="img-thumbnail" style="width: 200px; height: auto;">
+                <label for="image" class="position-absolute top-0 start-100 translate-middle p-2 bg-light rounded-circle">
                     <i class="bx bx-edit"></i>
-                    <input type="file" id="image" name="image" accept="image/*" class="hidden-input">
+                    <input type="file" id="image" name="image" accept="image/*" class="d-none">
                 </label>
             </div>
         </div>
 
         <!-- Product Name -->
-        <div class="form-group">
-            <label for="productName" class="label">Product Name</label>
-            <input type="text" id="productName" name="productName" class="input" value="{{product.ProductName}}" required>
+        <div class="mb-3">
+            <label for="productName" class="form-label">Product Name</label>
+            <input type="text" id="productName" name="productName" class="form-control" value="{{product.ProductName}}" required>
         </div>
 
         <!-- Category -->
-<div class="form-group">
-    <label for="category" class="label">Category</label>
-    <select id="category" name="category" class="input" required>
-        <option value="{{ product.ProductCategory }}" selected>{{ product.ProductCategory|capfirst }}</option>
-        
-        {% if product.ProductCategory|lower != "laptop" %}
-            <option value="laptop">Laptop</option>
-        {% endif %}
-        
-        {% if product.ProductCategory|lower != "smartphone" %}
-            <option value="smartphone">Smartphone</option>
-        {% endif %}
-        
-        {% if product.ProductCategory|lower != "tablet" %}
-            <option value="tablet">Tablet</option>
-        {% endif %}
-        
-        {% if product.ProductCategory|lower != "smartwatch" %}
-            <option value="smartwatch">Smartwatch</option>
-        {% endif %}
-        
-        {% if product.ProductCategory|lower != "headphones" %}
-            <option value="headphones">Headphones</option>
-        {% endif %}
-    </select>
-</div>
-
+        <div class="mb-3">
+            <label for="category" class="form-label">Category</label>
+            <select id="category" name="category" class="form-select" required>
+                <option value="{{ product.ProductCategory }}" selected>{{ product.ProductCategory|capfirst }}</option>
+                
+                {% if product.ProductCategory|lower != "laptop" %}
+                    <option value="laptop">Laptop</option>
+                {% endif %}
+                
+                {% if product.ProductCategory|lower != "smartphone" %}
+                    <option value="smartphone">Smartphone</option>
+                {% endif %}
+                
+                {% if product.ProductCategory|lower != "tablet" %}
+                    <option value="tablet">Tablet</option>
+                {% endif %}
+                
+                {% if product.ProductCategory|lower != "smartwatch" %}
+                    <option value="smartwatch">Smartwatch</option>
+                {% endif %}
+                
+                {% if product.ProductCategory|lower != "headphones" %}
+                    <option value="headphones">Headphones</option>
+                {% endif %}
+            </select>
+        </div>
 
         <!-- Quantity -->
-        <div class="form-group">
-            <label for="quantity" class="label">Quantity</label>
-            <input type="number" id="quantity" name="quantity" min="1" class="input" value="{{product.StockQuantity}}" required>
+        <div class="mb-3">
+            <label for="quantity" class="form-label">Quantity</label>
+            <input type="number" id="quantity" name="quantity" min="1" class="form-control" value="{{product.StockQuantity}}" required>
         </div>
 
         <!-- Price -->
-        <div class="form-group">
-            <label for="price" class="label">Price</label>
-            <input type="text" id="price" name="price" class="input" value="{{product.ProductPrice}}" min = 1 required>
+        <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <input type="text" id="price" name="price" class="form-control" value="{{product.ProductPrice}}" min="1" required>
         </div>
 
         <!-- Submit Button -->
-        <div class="form-group center">
-            <button type="submit" class="btn">Save Changes</button>
+        <div class="d-grid">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
         </div>
     </form>
-</div>
 
-<!-- Back to Product List Button -->
-<div class="center">
-    <a href="{% url 'product-list'%}" class="btn back-btn">&larr; Back to Product List</a>
+    <!-- Back to Product List Button -->
+    <div class="d-grid mt-3">
+        <a href="{% url 'product-list'%}" class="btn btn-secondary">&larr; Back to Product List</a>
+    </div>
 </div>
 {% endblock %}
+
