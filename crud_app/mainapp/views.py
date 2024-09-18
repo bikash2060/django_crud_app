@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 def custom_error_page(request, exception):
     context = {
@@ -170,3 +171,36 @@ def showSignUpPageView(request):
 def userLogout(request):
     logout(request)
     return redirect("user-login")
+
+def searchProduct(request):
+    if request.method == "GET":
+        search_query = request.GET.get('search')
+        if search_query:
+            products = Product.objects.filter(
+                Q(ProductName__icontains=search_query) |
+                Q(ProductCategory__icontains=search_query) |
+                Q(ProductPrice__icontains=search_query) |
+                Q(StockQuantity__icontains=search_query)
+            )
+        else:
+            products = Product.objects.all()
+
+        context = {
+            'products': products
+        }
+        return render(request, 'mainapp/productlist.html', context)
+
+def sortProduct(request):
+    if request.method == "GET":
+        sort = request.GET.get(SORT)
+        if sort == "low-to-high":
+            products = Product.objects.order_by('ProductPrice')
+        elif sort == "high-to-low":
+            products = Product.objects.order_by('-ProductPrice')
+        else:
+            products = Product.objects.all()
+        
+        context = {
+            'products': products
+        }
+        return render(request, 'mainapp/productlist.html', context)
