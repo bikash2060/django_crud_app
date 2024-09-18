@@ -68,9 +68,11 @@
                         <tr>
                             <td>{{ forloop.counter }}</td>
                             <td>
+                                <a href="{% static 'media/product_images/' %}{{ product.ProductImage }}" target="_blank">
                                 <img src="{% static 'media/product_images/' %}{{ product.ProductImage }}" 
                                      alt="{{ product.ProductName }}" class="img-fluid rounded" 
                                      style="width: 50px; height: 50px; object-fit: contain;">
+                                </a>
                             </td>
                             <td>{{ product.ProductName }}</td>
                             <td>{{ product.ProductCategory|capfirst }}</td>
