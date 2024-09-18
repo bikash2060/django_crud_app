@@ -172,33 +172,37 @@ def userLogout(request):
     logout(request)
     return redirect("user-login")
 
+@login_required(login_url="user-login/")
 def searchProduct(request):
+    userID = request.user.id
     if request.method == "GET":
         search_query = request.GET.get('search')
         if search_query:
             products = Product.objects.filter(
-                Q(ProductName__icontains=search_query) |
-                Q(ProductCategory__icontains=search_query) |
-                Q(ProductPrice__icontains=search_query) |
-                Q(StockQuantity__icontains=search_query)
+                Q(ProductName__icontains=search_query, user_id = userID) |
+                Q(ProductCategory__icontains=search_query, user_id = userID) |
+                Q(ProductPrice__icontains=search_query, user_id = userID) |
+                Q(StockQuantity__icontains=search_query, user_id = userID)
             )
         else:
-            products = Product.objects.all()
+            products = Product.objects.filter(user_id = userID)
 
         context = {
             'products': products
         }
         return render(request, 'mainapp/productlist.html', context)
 
+@login_required(login_url="user-login/")
 def sortProduct(request):
+    userID = request.user.id
     if request.method == "GET":
         sort = request.GET.get(SORT)
         if sort == "low-to-high":
-            products = Product.objects.order_by('ProductPrice')
+            products = Product.objects.filter(user_id = userID).order_by('ProductPrice')
         elif sort == "high-to-low":
-            products = Product.objects.order_by('-ProductPrice')
+            products = Product.objects.filter(user_id = userID).order_by('-ProductPrice')
         else:
-            products = Product.objects.all()
+            products = Product.objects.filter(user_id = userID)
         
         context = {
             'products': products
