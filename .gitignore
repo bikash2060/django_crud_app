@@ -13,6 +13,7 @@ db.sqlite3
 /static/
 
 # Virtual environments
+/virtualenv/
 /CRUD-APP/virtualenv/
 /crud_app/mainapp/__pycache__
 /crud_app/mainapp/migrations
