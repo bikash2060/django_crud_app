@@ -9,13 +9,30 @@
 <div class="d-flex justify-content-center align-items-center min-vh-100">
     <div class="container">
         <!-- Search Input Group -->
-        <div class="input-group mb-4">
-            <input id="search-focus" type="search" class="form-control with-50px" placeholder="Search" aria-label="Search">
-            <button type="button" class="btn btn-primary">
-                <i class="fas fa-search"></i>
-            </button>
+        <div class="d-flex">
+            <!-- Search Form -->
+            <form action="{% url 'search-product' %}" method="GET" class="flex-grow-1 me-2">
+                <div class="input-group mb-4">
+                    <input type="search" name="search" class="form-control with-50px" placeholder="Search" aria-label="Search">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </form>
+            
+            <!-- Sorting Form -->
+            <form action="{% url 'sort-product' %}" method="GET">
+                <div class="btn-group mb-4" role="group" aria-label="Price Sorting">
+                    <button type="submit" name="sort" value="low-to-high" class="btn btn-outline-secondary">
+                        Price: Low to High
+                    </button>
+                    <button type="submit" name="sort" value="high-to-low" class="btn btn-outline-secondary">
+                        Price: High to Low
+                    </button>
+                </div>
+            </form>
         </div>
-        
+
         <!-- Header with Title and Add Button -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1 class="h3">Product Inventory</h1>
